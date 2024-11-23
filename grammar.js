@@ -82,9 +82,18 @@ module.exports = grammar({
 
     expression_statement: $ => prec.right(seq($._expression_list)),
 
-    let_statement: $ => seq('let', $._expression_list, '=', $._expression_list),
+    let_statement: $ => seq(
+      'let',
+      field('pattern', $._expression_list),
+      '=',
+      field('value', $._expression_list)
+    ),
 
-    assign_statement: $ => prec.right(seq($._expression_list, '=', $._expression_list)),
+    assign_statement: $ => prec.right(seq(
+      field('pattern', $._expression_list),
+      '=',
+      field('value', $._expression_list)
+    )),
 
     if_statement: $ => prec.right(seq(
       'if',
@@ -117,7 +126,7 @@ module.exports = grammar({
     ),
 
     vararg_iterator: $ => prec(PREC.VARAEG_ITERATOR, seq(
-      field('patterns', $._expression_list),
+      field('pattern', $._expression_list),
       $._in,
       field('vararg', $.vararg)
     )),

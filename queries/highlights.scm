@@ -132,13 +132,39 @@
     (closure_body)
   ])
 
-(method_statement
-  name: (dot_expression
-          (identifier) @function.method)
-  implementation: [
+(let_statement
+  pattern: (dot_expression
+    field: (identifier) @function.method)
+  value: [
     (closure)
     (closure_body)
   ])
+
+(let_statement
+  pattern: (identifier) @function
+  value: [
+    (closure)
+    (closure_body)
+  ])
+
+(assign_statement
+  pattern: (dot_expression
+    field: (identifier) @function.method)
+  value: [
+    (closure)
+    (closure_body)
+  ])
+
+(assign_statement
+  pattern: (identifier) @function
+  value: [
+    (closure)
+    (closure_body)
+  ])
+
+(method_statement
+  name: (dot_expression
+          field: (identifier) @function.method))
 
 (dot_expression
   field: (identifier) @member)
