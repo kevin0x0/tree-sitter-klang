@@ -168,9 +168,9 @@ module.exports = grammar({
 
     return_statement: $ => seq('return', $._expression_list),
 
-    break_statement: $ => 'break',
+    break_statement: $ => prec.right(seq('break', optional(field('label', $.identifier)))),
 
-    continue_statement: $ => 'continue',
+    continue_statement: $ => prec.right(seq('continue', optional(field('label', $.identifier)))),
 
     local_statement: $ => seq('local', field('name', $.identifier), $._expression),
 

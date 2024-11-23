@@ -99,6 +99,11 @@
   (false)
 ] @boolean
 
+(break_statement
+  label: (identifier) @label)
+
+(continue_statement
+  label: (identifier) @label)
 
 (string) @string
 
@@ -143,12 +148,12 @@
     
 (class_shared_list
   (class_pair
-    field: (identifier) @function)
+    field: (identifier) @function
     value:
       [
         (closure)
         (closure_body)
-      ])
+      ]))
 
 (tuple
   "(" @punctuation.special
