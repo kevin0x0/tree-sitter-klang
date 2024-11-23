@@ -341,7 +341,7 @@ module.exports = grammar({
 
 
 
-    identifier: $ => /[A-Za-z_][A-Za-z0-9-]*|'([^']|\\.)*'/,
+    identifier: $ => /[A-Za-z_][A-Za-z0-9_]*|'([^']|\\.)*'/,
     wildcard: $ => '_',
     integer: $ => /0[0-7]*|[1-9][0-9]*|0[xX][A-Fa-f0-9]+/,
     float: $ => /[0-9]+\.[0-9]+/,
