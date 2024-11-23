@@ -2526,12 +2526,20 @@
           "value": "!"
         }
       ]
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": "--[^\\r\\n]*"
     }
   },
   "extras": [
     {
       "type": "PATTERN",
-      "value": "\\s"
+      "value": "\\s|\\\\\\r?\\n"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],

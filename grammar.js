@@ -46,6 +46,11 @@ module.exports = grammar({
     $._statement
   ],
 
+  extras: $ => [
+    /\s|\\\r?\n/,
+    $.comment,
+  ],
+
   rules: {
     source_file: $ => $._statement_list,
 
@@ -403,5 +408,7 @@ module.exports = grammar({
     _and: $ => choice('and', '&&'),
     _or: $ => choice('or', '||'),
     _not: $ => choice('not', '!'),
+
+    comment: $ => /--[^\r\n]*/,
   }
 });

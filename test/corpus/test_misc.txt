@@ -1,0 +1,18 @@
+===============
+comment
+===============
+
+-- hello
+-- world
+print "hello, world\n" -- hello
+
+---
+
+(source_file
+  (comment)
+  (comment)
+  (expression_statement
+    (call_expression
+      (identifier)
+      (string)))
+  (comment))
