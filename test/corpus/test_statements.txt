@@ -293,3 +293,18 @@ method foo.bar = n -> n + 1
       (binary_expression
         (identifier)
         (integer)))))
+
+
+
+===============
+break, continue
+===============
+
+break;
+continue;
+
+---
+
+(source_file
+  (break_statement)
+  (continue_statement))
