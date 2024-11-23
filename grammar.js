@@ -47,7 +47,7 @@ module.exports = grammar({
   ],
 
   extras: $ => [
-    /\s|\\\r?\n/,
+    /\s/,
     $.comment,
   ],
 
