@@ -1,81 +1,114 @@
 (identifier) @variable
 
+((identifier) @variable.builtin
+  (#eq? @variable.builtin "self"))
+
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]*$"))
 
-"if" @keyword.conditional
-"else" @keyword
-"for" @keyword.repeat
-"in" @keyword
-"while" @keyword.repeat
-"repeat" @keyword.repeat
-"until" @keyword.repeat
-"match" @keyword
-"case" @keyword
-"of" @keyword
-"return" @keyword.return
-"break" @keyword
-"continue" @keyword
-"return" @keyword
-"local" @keyword
-"method" @keyword
-"shared" @keyword
-"where" @keyword
-"yield" @keyword.return
+[
+  "break" 
+  "continue" 
+  "return" 
+  "local" 
+  "method" 
+  "shared" 
+  "where" 
+  "inherit" 
+  "new" 
+  "in"
+] @keyword
+
 "async" @keyword.coroutine
-"is" @keyword.operator
-"isnot" @keyword.operator
-"and" @keyword.operator
-"or" @keyword.operator
-"not" @keyword.operator
-"inherit" @keyword
-"new" @keyword
+
+[
+  "if"
+  "else"
+  "match" 
+  "case" 
+  "of" 
+] @keyword.conditional
+
+[
+  "for"
+  "while"
+  "repeat"
+  "until"
+] @keyword.repeat
+
+[
+  "return"
+  "yield"
+] @keyword.return
+
+[
+  "is"
+  "isnot"
+  "and"
+  "or"
+  "not"
+] @keyword.operator
 
 
-"<-" @operator
-"+" @operator
-"-" @operator
-"*" @operator
-"/" @operator
-"%" @operator
-"//" @operator
-":=" @operator
-"<<" @operator
-"->" @operator
-"=>" @operator
-"=" @operator
-">" @operator
-">=" @operator
-"<" @operator
-"<=" @operator
-"==" @operator
-"!=" @operator
-"===" @operator
-"!==" @operator
-"&&" @operator
-"||" @operator
-"!" @operator
-"$" @operator
 
-"." @punctuation.delimiter
-";" @punctuation.delimiter
-"," @punctuation.delimiter
-":" @punctuation.delimiter
+[
+  "."
+  ";"
+  ","
+  ":"
+] @punctuation.delimiter
 
-"(" @punctuation.bracket
-")" @punctuation.bracket
-"[" @punctuation.bracket
-"]" @punctuation.bracket
-"{" @punctuation.bracket
-"}" @punctuation.bracket
+[
+  "("
+  ")"
+  "["
+  "]"
+  "{"
+  "}"
+] @punctuation.bracket
+
+[
+  "<-" 
+  "+" 
+  "-" 
+  "*" 
+  "/" 
+  "%" 
+  "//" 
+  ":=" 
+  "<<" 
+  "->" 
+  "=>" 
+  "=" 
+  ">" 
+  ">=" 
+  "<" 
+  "<=" 
+  "==" 
+  "!=" 
+  "===" 
+  "!==" 
+  "&&" 
+  "||" 
+  "!" 
+  "$"
+] @operator
+
+[
+  (true)
+  (false)
+] @boolean
+
 
 (string) @string
 
 (nil) @constant.builtin
-(true) @boolean
-(false) @boolean
-(float) @number
-(integer) @number
+
+[
+  (float)
+  (integer)
+] @number
+
 (wildcard) @character.special
 (vararg) @string.special
 
@@ -102,7 +135,20 @@
   ])
 
 (dot_expression
-  field: (identifier) @property)
+  field: (identifier) @member)
+
+(class_method
+  (class_pair
+    field: (identifier) @function.method))
+    
+(class_shared_list
+  (class_pair
+    field: (identifier) @function)
+    value:
+      [
+        (closure)
+        (closure_body)
+      ])
 
 (tuple
   "(" @punctuation.special
