@@ -1915,7 +1915,7 @@
     },
     "identifier": {
       "type": "PATTERN",
-      "value": "[A-Za-z_][A-Za-z0-9-]*|'([^']|\\\\.)*'"
+      "value": "[A-Za-z_][A-Za-z0-9_]*|'([^']|\\\\.)*'"
     },
     "wildcard": {
       "type": "STRING",
