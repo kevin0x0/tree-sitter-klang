@@ -1,0 +1,36 @@
+{
+  "grammars": [
+    {
+      "name": "klang",
+      "camelcase": "Klang",
+      "scope": "source.klang",
+      "file-types": [
+        ".kl",
+        ".klang"
+      ],
+      "injection-regex": "^klang$"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Klang grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Ji, Kaiwen",
+        "email": "kevin0x00@163.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/kevin0x0/tree-sitter-klang"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

@@ -1,0 +1,391 @@
+===============
+atomic
+===============
+
+abcd10, 'aji\n\'', "string\x1F\"", `jfiieji\"`, 0x1F, 032, 10, true, false, nil, 1.3, ..., _, (1, a, ()), [1, 2, a], {:}, {a: "afa"}
+
+---
+
+(source_file
+  (expression_statement
+    (identifier)
+    (identifier)
+    (string)
+    (string)
+    (integer)
+    (integer)
+    (integer)
+    (true)
+    (false)
+    (nil)
+    (float)
+    (vararg)
+    (wildcard)
+    (tuple
+      (integer)
+      (identifier)
+      (tuple))
+    (array
+      (integer)
+      (integer)
+      (identifier))
+    (map)
+    (map
+      (pair
+        (identifier)
+        (string)))))
+
+
+===============
+comprehension
+===============
+
+[a, b | a = 0, 10; let b = 1; true];
+{a: b, 3: c | a = 0, 10; let b = 1; true};
+
+---
+
+(source_file
+  (expression_statement
+    (array_comprehension
+      (identifier)
+      (identifier)
+      (comprehension_list
+        (integer_iterator
+          (identifier)
+          (integer)
+          (integer))
+        (let_statement
+          (identifier)
+          (integer))
+        (true))))
+  (expression_statement
+    (map_comprehension
+      (pair
+        (identifier)
+        (identifier))
+      (pair
+        (integer)
+        (identifier))
+      (comprehension_list
+        (integer_iterator
+          (identifier)
+          (integer)
+          (integer))
+        (let_statement
+          (identifier)
+          (integer))
+        (true)))))
+
+
+
+===============
+class
+===============
+
+{ local a, b; c = 1, d = 2; method n = 3 };
+{};
+
+---
+
+(source_file
+  (expression_statement
+    (class
+      (class_local_list
+        (identifier)
+        (identifier))
+      (class_shared_list
+        (class_pair
+          (identifier)
+          (integer))
+        (class_pair
+          (identifier)
+          (integer)))
+      (class_method
+        (class_pair
+          (identifier)
+          (integer)))))
+  (expression_statement
+    (class)))
+
+
+
+
+===============
+group
+===============
+
+(1)
+
+---
+
+(source_file
+  (expression_statement
+    (group_expression
+      (integer))))
+
+
+
+===============
+case
+===============
+
+case a of
+  1 = 3,
+  b = a,
+  _ = true
+
+---
+
+(source_file
+  (expression_statement
+    (case_expression
+      (identifier)
+      (case
+        (integer)
+        (integer))
+      (case
+        (identifier)
+        (identifier))
+      (case
+        (wildcard)
+        (true)))))
+
+
+
+===============
+closure body
+===============
+
+=> let a = 1;
+-> a;
+
+---
+
+(source_file
+  (expression_statement
+    (closure_body
+      (let_statement
+        (identifier)
+        (integer))))
+  (expression_statement
+    (closure_body
+        (identifier))))
+
+
+
+===============
+closure
+===============
+
+a => let a = 1;
+(a) -> a;
+(a, b) -> a;
+() -> 1;
+(()) -> 1;
+
+---
+
+(source_file
+  (expression_statement
+    (closure
+      (parameter_list
+        (identifier))
+      (let_statement
+        (identifier)
+        (integer))))
+  (expression_statement
+    (closure
+      (parameter_list
+        (group_expression
+          (identifier)))
+      (identifier)))
+  (expression_statement
+    (closure
+      (parameter_list
+        (identifier)
+        (identifier))
+      (identifier)))
+  (expression_statement
+    (closure
+      (parameter_list)
+      (integer)))
+  (expression_statement
+    (closure
+      (parameter_list
+        (group_expression
+          (tuple)))
+      (integer))))
+
+
+
+===============
+walrus
+===============
+
+a := b := 3
+
+---
+
+(source_file
+  (expression_statement
+    (walrus_expression
+      (identifier)
+      (walrus_expression
+        (identifier)
+        (integer)))))
+
+
+
+===============
+where
+===============
+
+a where let a = e where let e = 3;
+
+---
+
+(source_file
+  (expression_statement
+    (where_expression
+      (identifier)
+      (let_statement
+        (identifier)
+        (where_expression
+          (identifier)
+          (let_statement
+            (identifier)
+            (integer)))))))
+
+
+
+===============
+append
+===============
+
+a << 1, 2, a
+
+---
+
+(source_file
+  (expression_statement
+    (append_expression
+      (identifier)
+      (integer)
+      (integer)
+      (identifier))))
+
+
+
+===============
+binary
+===============
+
+1 + 2 * 4 / (-10 - 9) - 4
+
+---
+
+(source_file
+  (expression_statement
+    (binary_expression
+      (binary_expression
+        (integer)
+        (binary_expression
+          (binary_expression
+            (integer)
+            (integer))
+          (group_expression
+            (binary_expression
+              (unary_expression
+                (integer))
+              (integer)))))
+      (integer))))
+
+
+
+===============
+unary
+===============
+
+-12;
+$"a";
+
+---
+
+(source_file
+  (expression_statement
+    (unary_expression
+      (integer)))
+  (expression_statement
+    (unary_expression
+      (string))))
+
+
+
+===============
+inherit
+===============
+
+inherit a { local a };
+
+---
+
+(source_file
+  (expression_statement
+    (inherit_expression
+      (identifier)
+      (class
+        (class_local_list
+          (identifier))))))
+
+
+===============
+index, call, dot
+===============
+
+a[1];
+a [1];
+a(1, 2);
+a (1, 2);
+a.b.c;
+a b c;
+
+---
+
+(source_file
+  (expression_statement
+    (index_expression
+      (identifier)
+      (integer)))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (array
+        (integer))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (argument_list
+        (integer)
+        (integer))))
+  (expression_statement
+    (call_expression
+      (identifier)
+      (tuple
+        (integer)
+        (integer))))
+  (expression_statement
+    (dot_expression
+      (dot_expression
+        (identifier)
+        (identifier))
+      (identifier)))
+  (expression_statement
+    (call_expression
+      (call_expression
+        (identifier)
+        (identifier))
+      (identifier))))
+
+
+

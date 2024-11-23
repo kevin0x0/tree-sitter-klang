@@ -1,0 +1,295 @@
+===============
+assign statement
+===============
+
+a, b = 1, 2
+
+---
+
+(source_file
+  (assign_statement
+    (identifier)
+    (identifier)
+    (integer)
+    (integer)))
+
+
+
+===============
+let statement
+===============
+
+let a, b = 1, 2
+
+---
+
+(source_file
+  (let_statement
+    (identifier)
+    (identifier)
+    (integer)
+    (integer)))
+
+
+
+===============
+if statement
+===============
+
+if a:
+  1
+
+---
+
+(source_file
+  (if_statement
+    (identifier)
+    (expression_statement
+      (integer))))
+
+
+
+===============
+if if else
+===============
+
+if a:
+  if b: 1 else 2
+
+---
+
+(source_file
+  (if_statement
+    (identifier)
+    (if_statement
+      (identifier)
+      (expression_statement
+        (integer))
+      (expression_statement
+        (integer)))))
+
+
+
+===============
+if statement with else
+===============
+
+if a:
+  1
+else
+  2
+
+---
+
+(source_file
+  (if_statement
+    (identifier)
+    (expression_statement
+      (integer))
+    (expression_statement
+      (integer))))
+
+
+
+===============
+statement block
+===============
+
+if 1: {
+  let a = 1;
+  a;
+}
+
+---
+
+(source_file
+  (if_statement
+    (integer)
+    (let_statement
+      (identifier)
+      (integer))
+    (expression_statement
+      (identifier))))
+
+
+
+===============
+while statement
+===============
+
+while 1: a
+
+---
+
+(source_file
+  (while_statement
+    (integer)
+    (expression_statement
+      (identifier))))
+
+
+
+===============
+for statement integer
+===============
+
+for a = 1, 2:
+  3
+
+---
+
+(source_file
+  (for_statement
+    (integer_iterator
+      (identifier)
+      (integer)
+      (integer))
+    (expression_statement
+      (integer))))
+
+
+
+===============
+for statement vararg
+===============
+
+for a, b in ...:
+  3
+
+---
+
+(source_file
+  (for_statement
+    (vararg_iterator
+      (identifier)
+      (identifier)
+      (vararg))
+    (expression_statement
+      (integer))))
+
+
+
+===============
+for statement generic
+===============
+
+for a, b in 1:
+  3
+
+---
+
+(source_file
+  (for_statement
+    (generic_iterator
+      (identifier)
+      (identifier)
+      (integer))
+    (expression_statement
+      (integer))))
+
+
+
+===============
+repeat statement
+===============
+
+repeat
+  let a = 1
+
+---
+
+(source_file
+  (repeat_statement
+    (let_statement
+      (identifier)
+      (integer))))
+
+
+
+===============
+repeat statement with until
+===============
+
+repeat
+  let a = 1
+until b
+
+---
+
+(source_file
+  (repeat_statement
+    (let_statement
+      (identifier)
+      (integer))
+    (identifier)))
+
+
+
+===============
+match statement
+===============
+
+match 1: {
+  a: {
+    1;
+  }
+  b: {
+    2;
+  }
+  c: 3;
+}
+
+---
+
+(source_file
+  (match_statement
+    (integer)
+    (match_case
+      (identifier)
+      (expression_statement
+        (integer)))
+    (match_case
+      (identifier)
+      (expression_statement
+        (integer)))
+    (match_case
+      (identifier)
+      (expression_statement
+        (integer)))))
+
+
+
+===============
+local statement
+===============
+
+local f 1
+
+---
+
+(source_file
+  (local_statement
+    (identifier)
+    (integer)))
+
+
+
+===============
+method statement
+===============
+
+method foo.bar = n -> n + 1
+
+---
+
+(source_file
+  (method_statement
+    (dot_expression
+      (identifier)
+      (identifier))
+    (closure
+      (parameter_list
+        (identifier))
+      (binary_expression
+        (identifier)
+        (integer)))))
