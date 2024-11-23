@@ -17,6 +17,7 @@
   "inherit" 
   "new" 
   "in"
+  "let"
 ] @keyword
 
 "async" @keyword.coroutine
