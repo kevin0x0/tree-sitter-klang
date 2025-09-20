@@ -4,8 +4,25 @@
   "word": "identifier",
   "rules": {
     "source_file": {
-      "type": "SYMBOL",
-      "name": "_statement_list"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "#![^\\n\\r]*"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_statement_list"
+        }
+      ]
     },
     "_statement": {
       "type": "CHOICE",
@@ -2616,5 +2633,6 @@
     "_expression",
     "_statement"
   ],
-  "supertypes": []
+  "supertypes": [],
+  "reserved": {}
 }
