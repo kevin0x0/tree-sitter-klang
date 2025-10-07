@@ -52,7 +52,9 @@ module.exports = grammar({
   ],
 
   rules: {
-    source_file: $ => seq(optional(/#![^\n\r]*/), $._statement_list),
+    source_file: $ => seq(optional($.shebang), $._statement_list),
+
+    shebang: $ => /#![^\n\r]*/,
 
     _statement: $ => choice(
       $.expression_statement,

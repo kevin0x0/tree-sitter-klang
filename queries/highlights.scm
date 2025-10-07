@@ -1,3 +1,4 @@
+(shebang) @shebang
 (identifier) @variable
 
 ((identifier) @variable.builtin
